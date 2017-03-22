@@ -41,7 +41,7 @@ describe('/api', function() {
             return done(err);
           }
           expect(result.body).to.be.instanceof(Array);
-          singleResult = body[0];
+          singleResult = result.body[0];
           done();
         });
     });
@@ -49,7 +49,9 @@ describe('/api', function() {
     describe('returned search objects', function() {
       it('should contain the properties: term, when', function(done) {
         expect(singleResult.term).to.exist;
-        expect(singleResult.when).to.be.instanceof(Date);
+        const timestamp = new Date(singleResult.when);
+        expect(timestamp).to.be.instanceof(Date);
+        done();
       });
     });
   });
